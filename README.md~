@@ -13,7 +13,7 @@ Here is the [original puzzle I asked in Computer Science Stack Exchange] (http:/
 Based on a comment by András Salamon, I decided to pose it as a SAT problem.
 
 This program converts an instance of the above puzzle to a CNF formula, in 
-[the format of the MiniSat solver] (http://www.dwheeler.com/essays/minisat-user-guide.html).
+the format of the MiniSat solver: http://www.dwheeler.com/essays/minisat-user-guide.html
 
 How to use the program
 ----------------------
