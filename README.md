@@ -20,7 +20,7 @@ How to use the program
     node team-construction.js [NUM-OF-CANDIDATES] > [FILENAME].in
     minisat [FILENAME].in > [FILENAME].out
 
-For small values of NUM-OF-CANDIDATES, minisat will return "SATISFIABLE", which means that it is possible to have a graph with this number of candidates per profession, but without a feasible team.
+For small values of NUM-OF-CANDIDATES, minisat will return "SATISFIABLE", which means that it is possible to have a graph with this number of candidates per profession, but without a feasible team. The output file will contain an example of such a graph (as a list of edges that are contained or not contained in the graph)
 
 For large enough values of NUM-OF-CANDIDATES (how much? that's the question) minisat will return "UNSATISFIABLE", which means that it is not possible to have a graph without a feasible team, i.e., it is always possible to construct a team.
 
