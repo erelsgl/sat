@@ -1,0 +1,33 @@
+// This is a sample file that solves a certain square-related problem. 
+
+// The following macro handles intersection relations between rectangles. 
+// Let a and b be names of squares. intersect(a,b) defines a formula meaning "rectangle a intersects rectangle b".
+// Additionally, it asserts an obvious transitivity relation between corners of the rectangles.
+#define define_rects(a,b) \
+a##_entirely_west_of_##b := ~a##xmax_gt_##b##xmin;\
+a##_entirely_east_of_##b := ~b##xmax_gt_##a##xmin;\
+a##_entirely_south_of_##b := ~a##ymax_gt_##b##ymin;\
+a##_entirely_north_of_##b := ~b##ymax_gt_##a##ymin;\
+a##_intersects_west_of_##b := a##xmax_gt_##b##xmin & b##xmax_gt_##a##xmin & ~a##xmax_gt_##b##xmax;\
+a##_intersects_east_of_##b := a##xmax_gt_##b##xmin & b##xmax_gt_##a##xmin &  a##xmax_gt_##b##xmax;\
+a##_intersects_south_of_##b := a##ymax_gt_##b##ymin & b##ymax_gt_##a##ymin & ~a##ymax_gt_##b##ymax;\
+a##_intersects_north_of_##b := a##ymax_gt_##b##ymin & b##ymax_gt_##a##ymin & a##ymax_gt_##b##ymax;\
+a##_intersects_##b := a##xmax_gt_##b##xmin & b##xmax_gt_##a##xmin & a##ymax_gt_##b##ymin & b##ymax_gt_##a##ymin;\
+a##_intersects_southwest_of_##b := a##_intersects_##b & ~a##ymax_gt_##b##ymax & ~a##xmax_gt_##b##xmax;\
+a##_intersects_northwest_of_##b := a##_intersects_##b &  a##ymax_gt_##b##ymax & ~a##xmax_gt_##b##xmax;\
+a##_intersects_southeast_of_##b := a##_intersects_##b & ~a##ymax_gt_##b##ymax &  a##xmax_gt_##b##xmax;\
+a##_intersects_northeast_of_##b := a##_intersects_##b &  a##ymax_gt_##b##ymax &  a##xmax_gt_##b##xmax;\
+transitive_##a##_##b := (~a##ymax_gt_##b##ymin => b##ymax_gt_##a##ymin) & (~a##xmax_gt_##b##xmin => b##xmax_gt_##a##xmin) & (~b##ymax_gt_##a##ymin => a##ymax_gt_##b##ymin) & (~b##xmax_gt_##a##xmin => a##xmax_gt_##b##xmin) & (a##xmax_gt_##b##xmax => a##xmax_gt_##b##xmin) & (~a##xmax_gt_##b##xmax => b##xmax_gt_##a##xmin) & (a##ymax_gt_##b##ymax => a##ymax_gt_##b##ymin) & (~a##ymax_gt_##b##ymax => b##ymax_gt_##a##ymin); \
+ASSIGN transitive_##a##_##b;
+
+define_rects(red1,red2)
+red_disjoint := ~red1_intersects_red2; 
+define_rects(grn1,grn2)
+grn_disjoint := ~grn1_intersects_grn2;
+define_rects(red1,grn1)
+define_rects(red1,grn2)
+define_rects(red2,grn1)
+define_rects(red2,grn2)
+
+ASSIGN red_disjoint, grn_disjoint;
+ASSIGN red1_intersects_grn1, red1_intersects_grn2, red2_intersects_grn1, red2_intersects_grn2;
